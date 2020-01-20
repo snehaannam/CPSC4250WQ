@@ -34,9 +34,13 @@
                                     Orientation="Vertical">
 
                                     <StackLayout 
+                                        Orientation="Horizontal"
                                         Style="{DynamicResource StackLayoutList}">
 
                                         <Label Text="{Binding Name}" 
+                                           Style="{DynamicResource LabelList}" />
+                                        <Label Text="=" />
+                                        <Label Text="{Binding Value}" 
                                            Style="{DynamicResource LabelList}" />
                                     </StackLayout>
 
