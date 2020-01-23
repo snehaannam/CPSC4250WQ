@@ -30,11 +30,11 @@ namespace Mine.Services
         {
             datalist = new List<ItemModel>()
             {
-                new ItemModel { Name = "Banna Peal", Description="Causes cart behind to slip.", Value=5 },
-                new ItemModel { Name = "Red Shell", Description="Auto targets the cart infront.", Value=1 },
-                new ItemModel { Name = "Triple Red Shell", Description="3 Red Shells.", Value= 3 },
-                new ItemModel { Name = "Green Shell", Description="Shoots forward Unguided.", Value=6 },
-                new ItemModel { Name = "Lightning Bolt", Description="Causes others to shrink.", Value=9 }
+                new ItemModel { Name = "Cherry Bomb", Description="Causes monster to freeze.", Value=5 },
+                new ItemModel { Name = "Supersonic Waves", Description="Disables monster with powerful waves.", Value=1 },
+                new ItemModel { Name = "flaming Sword", Description="Brings in flame and damage monster.", Value= 3 },
+                new ItemModel { Name = "Slashing Knives", Description="Shoots a set of knives at monster.", Value=6 },
+                new ItemModel { Name = "Thunder Bolt", Description="Causes monster to shrink.", Value=9 }
             };
 
             return true;
