@@ -17,6 +17,7 @@ namespace Mine.Views
         public AboutPage()
         {
             InitializeComponent();
+            CurrentDataTime.Text = System.DateTime.Now.ToString("MM/dd/yy hh:mm:ss");
         }
     }
 }
