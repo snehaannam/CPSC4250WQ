@@ -10,5 +10,19 @@
         // The Value of the item
 
         public int Value { get; set; } = 0;
+
+        public bool Update(ItemModel data)
+        {
+            //Do not update the ID, if you do, the record will be orphaned
+            //Id = data.Id;
+
+            //Update the base
+            Name = data.Name;
+            Description = data.Description;
+            //Update the extended
+            Value = data.Value;
+
+            return true;
+        }
     }
 }
