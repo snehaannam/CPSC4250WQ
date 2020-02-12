@@ -81,5 +81,15 @@ namespace Mine.Services
             return await Database.Table<ItemModel>().Where(i => i.Id.Equals(id)).FirstOrDefaultAsync();
         }
 
+
+        /// <summary>
+        /// Get the full list of data
+        /// </summary>
+        /// <param name="forceRefresh"></param>
+        /// <returns></returns>
+        public async Task<List<ItemModel>> IndexAsync(bool forceRefresh = false)
+        {
+            return await Database.Table<ItemModel>().ToListAsync();
+        }
     }
 }
