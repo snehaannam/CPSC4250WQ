@@ -17,6 +17,7 @@ namespace Mine
             InitializeComponent();
 
             //DependencyService.Register<MockDataStore>();
+            var instance = ViewModels.ItemIndexViewModel.Instance;
 
             // Call the Main Page to open
             MainPage = new MainPage();
