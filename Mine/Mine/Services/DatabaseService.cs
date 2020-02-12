@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace Mine.Services
 {
-    public class DatabaseService
+    public class DatabaseService : IDataStore<ItemModel>
     {
         static readonly Lazy<SQLiteAsyncConnection> lazyInitializer = new Lazy<SQLiteAsyncConnection>(() =>
         {
@@ -42,9 +42,10 @@ namespace Mine.Services
         /// </summary>
         /// <param name="data"></param>
         /// <returns>1 for pass, else fail</returns>
-        public async Task<int> CreateAsync(ItemModel data)
+        public async Task<bool> CreateAsync(ItemModel data)
         {
-            return await Database.InsertAsync(data);
+            int result = await Database.InsertAsync(data);
+            return result > 0 ? true : false;
         }
 
         /// <summary>
@@ -52,9 +53,10 @@ namespace Mine.Services
         /// </summary>
         /// <param name="data"></param>
         /// <returns>1 for pass, else fail</returns>
-        public async Task<int> UpdateAsync(ItemModel data)
+        public async Task<bool> UpdateAsync(ItemModel data)
         {
-            return await Database.UpdateAsync(data);
+            int result = await Database.UpdateAsync(data);
+            return result > 0 ? true : false;
         }
 
         /// <summary>
@@ -64,11 +66,12 @@ namespace Mine.Services
         /// <param name="id"></param>
         /// <returns>True for pass, else fail</returns>
         /// 
-        public async Task<int> DeleteAsync(string id)
+        public async Task<bool> DeleteAsync(string id)
         {
             var data = Database.Table<ItemModel>().Where(i => i.Id.Equals(id)).FirstOrDefaultAsync();
 
-            return await Database.DeleteAsync(data);
+            int result = await Database.DeleteAsync(data);
+            return result > 0 ? true : false;
         }
 
         /// <summary>
