@@ -174,6 +174,12 @@ namespace Mine.ViewModels
             return result;
         }
 
+        public void WipeDataList()
+        {
+            DataStore.WipeDataList();
+            SetNeedsRefresh(true);
+        }
+
         #region Refresh
         // Return True if a refresh is needed
         // It sets the refresh flag to false
