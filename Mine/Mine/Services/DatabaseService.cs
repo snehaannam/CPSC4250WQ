@@ -71,5 +71,15 @@ namespace Mine.Services
             return await Database.DeleteAsync(data);
         }
 
+        /// <summary>
+        /// Takes the ID and finds it in the database
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Record if found else null</returns>
+        public async Task<ItemModel> ReadAsync(string id)
+        {
+            return await Database.Table<ItemModel>().Where(i => i.Id.Equals(id)).FirstOrDefaultAsync();
+        }
+
     }
 }
