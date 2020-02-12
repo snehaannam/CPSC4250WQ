@@ -35,6 +35,17 @@ namespace Mine.Services
                 }
             }
         }
-        
+
+
+        /// <summary>
+        /// Add the data to the database
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns>1 for pass, else fail</returns>
+        public async Task<int> CreateAsync(ItemModel data)
+        {
+            return await Database.InsertAsync(data);
+        }
+
     }
 }
