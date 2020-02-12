@@ -47,5 +47,15 @@ namespace Mine.Services
             return await Database.InsertAsync(data);
         }
 
+        /// <summary>
+        /// Update the data with the information passed in
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns>1 for pass, else fail</returns>
+        public async Task<int> UpdateAsync(ItemModel data)
+        {
+            return await Database.UpdateAsync(data);
+        }
+
     }
 }
