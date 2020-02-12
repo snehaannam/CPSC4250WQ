@@ -57,5 +57,19 @@ namespace Mine.Services
             return await Database.UpdateAsync(data);
         }
 
+        /// <summary>
+        /// Deletes the Data passed in by
+        /// Removing it from the database
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>True for pass, else fail</returns>
+        /// 
+        public async Task<int> DeleteAsync(string id)
+        {
+            var data = Database.Table<ItemModel>().Where(i => i.Id.Equals(id)).FirstOrDefaultAsync();
+
+            return await Database.DeleteAsync(data);
+        }
+
     }
 }
