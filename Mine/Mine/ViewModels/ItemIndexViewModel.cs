@@ -95,6 +95,12 @@ namespace Mine.ViewModels
             {
                 await Update(data as ItemModel);
             });
+
+            MessagingCenter.Subscribe<AboutPage, bool>(this, "WipeDataList", (obj, data) =>
+            {
+                WipeDataList();
+            });
+
         }
 
 
