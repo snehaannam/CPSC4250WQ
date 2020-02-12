@@ -41,7 +41,7 @@ namespace Mine.Services
         /// Add the data to the database
         /// </summary>
         /// <param name="data"></param>
-        /// <returns>1 for pass, else fail</returns>
+        /// <returns>true for pass, else fail</returns>
         public Task<bool> CreateAsync(ItemModel data)
         {
             Database.InsertAsync(data);
@@ -52,14 +52,13 @@ namespace Mine.Services
         /// Update the data with the information passed in
         /// </summary>
         /// <param name="data"></param>
-        /// <returns>1 for pass, else fail</returns>
+        /// <returns>true for pass, else fail</returns>
         public Task<bool> UpdateAsync(ItemModel data)
         {
             var oldData = ReadAsync(data.Id).GetAwaiter().GetResult();
             if (oldData == null)
             {
                 return Task.FromResult(false);
-
             }
             Database.UpdateAsync(data);
             return Task.FromResult(true);
@@ -79,11 +78,9 @@ namespace Mine.Services
             if (data == null)
             {
                 return Task.FromResult(false);
-
             }
             Database.DeleteAsync(data);
             return Task.FromResult(true);
-
         }
 
         /// <summary>
