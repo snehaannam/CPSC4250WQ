@@ -42,10 +42,10 @@ namespace Mine.Services
         /// </summary>
         /// <param name="data"></param>
         /// <returns>1 for pass, else fail</returns>
-        public async Task<bool> CreateAsync(ItemModel data)
+        public Task<bool> CreateAsync(ItemModel data)
         {
-            int result = await Database.InsertAsync(data);
-            return result > 0 ? true : false;
+            Database.InsertAsync(data);
+            return Task.FromResult(true);
         }
 
         /// <summary>
@@ -53,10 +53,16 @@ namespace Mine.Services
         /// </summary>
         /// <param name="data"></param>
         /// <returns>1 for pass, else fail</returns>
-        public async Task<bool> UpdateAsync(ItemModel data)
+        public Task<bool> UpdateAsync(ItemModel data)
         {
-            int result = await Database.UpdateAsync(data);
-            return result > 0 ? true : false;
+            var oldData = ReadAsync(data.Id).GetAwaiter().GetResult();
+            if (oldData == null)
+            {
+                return Task.FromResult(false);
+
+            }
+            Database.UpdateAsync(data);
+            return Task.FromResult(true);
         }
 
         /// <summary>
@@ -66,12 +72,18 @@ namespace Mine.Services
         /// <param name="id"></param>
         /// <returns>True for pass, else fail</returns>
         /// 
-        public async Task<bool> DeleteAsync(string id)
+        public Task<bool> DeleteAsync(string id)
         {
-            var data = Database.Table<ItemModel>().Where(i => i.Id.Equals(id)).FirstOrDefaultAsync();
+            
+            var data = ReadAsync(id).GetAwaiter().GetResult();
+            if (data == null)
+            {
+                return Task.FromResult(false);
 
-            int result = await Database.DeleteAsync(data);
-            return result > 0 ? true : false;
+            }
+            Database.DeleteAsync(data);
+            return Task.FromResult(true);
+
         }
 
         /// <summary>
@@ -79,9 +91,9 @@ namespace Mine.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Record if found else null</returns>
-        public async Task<ItemModel> ReadAsync(string id)
+        public Task<ItemModel> ReadAsync(string id)
         {
-            return await Database.Table<ItemModel>().Where(i => i.Id.Equals(id)).FirstOrDefaultAsync();
+            return Database.Table<ItemModel>().Where(i => i.Id.Equals(id)).FirstOrDefaultAsync();
         }
 
 
@@ -90,9 +102,9 @@ namespace Mine.Services
         /// </summary>
         /// <param name="forceRefresh"></param>
         /// <returns></returns>
-        public async Task<List<ItemModel>> IndexAsync(bool forceRefresh = false)
+        public Task<List<ItemModel>> IndexAsync(bool forceRefresh = false)
         {
-            return await Database.Table<ItemModel>().ToListAsync();
+            return Database.Table<ItemModel>().ToListAsync();
         }
     }
 }
