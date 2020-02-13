@@ -52,7 +52,7 @@ namespace Mine.ViewModels
         public IDataStore<ItemModel> DataStore;
 
         public int CurrentDataSource = 0;
-
+        
         // Command to force a Load of data
         public Command LoadDatasetCommand { get; set; }
 
@@ -63,9 +63,9 @@ namespace Mine.ViewModels
         /// 
         /// The constructor subscribes message listeners for crudi operations
         /// </summary>
-        public ItemIndexViewModel()
+        private ItemIndexViewModel()
         {
-            SetDataSource(CurrentDataSource); //set to mock to start with
+            SetDataSource(CurrentDataSource);   // Set to Mock to start with
 
             Title = "Items";
 
@@ -89,7 +89,7 @@ namespace Mine.ViewModels
             {
                 await Delete(data as ItemModel);
             });
-            
+
             // Register the Update Message
             MessagingCenter.Subscribe<ItemUpdatePage, ItemModel>(this, "Update", async (obj, data) =>
             {
@@ -109,7 +109,7 @@ namespace Mine.ViewModels
             if (isSQL == 1)
             {
                 DataStore = DataSource_SQL;
-                CurrentDataSource = 1;
+                CurrentDataSource = 1;            
             }
             else
             {
@@ -230,7 +230,7 @@ namespace Mine.ViewModels
 
                 foreach (var data in dataset)
                 {
-                    Dataset.Add(data);
+                    Dataset.Add(new ItemModel(data));
                 }
             }
             catch (Exception ex)
